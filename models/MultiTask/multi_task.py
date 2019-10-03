@@ -31,8 +31,7 @@ class Bert:
         emb = emb_layer(x_w2v)
         convs = []
         for kernel_size in range(1, 5):
-            conv = emb
-            conv = BatchNormalization()(conv)
+            conv = BatchNormalization()(emb)
             conv = Conv1D(128, kernel_size, activation='relu')(conv)
             convs.append(conv)
         poolings = [GlobalMaxPooling1D()(conv) for conv in convs]
