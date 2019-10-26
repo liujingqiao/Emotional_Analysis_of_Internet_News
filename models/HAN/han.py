@@ -32,7 +32,7 @@ class HAN:
         review_input = Input(shape=(max_sen, max_word), dtype='int32')
         review_encoder = TimeDistributed(sentEncoder)(review_input)
         l_lstm_sent = Bidirectional(CuDNNLSTM(100, return_sequences=True))(review_encoder)
-        l_lstm_sent = Bidirectional(CuDNNLSTM(100, return_sequences=True))(review_encoder)
+        l_lstm_sent = Bidirectional(CuDNNLSTM(100, return_sequences=True))(l_lstm_sent)
         l_att_sent = AttLayer(100)(l_lstm_sent)
         preds = Dense(3, activation='softmax')(l_att_sent)
         model = Model(review_input, preds)
